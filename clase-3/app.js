@@ -29,6 +29,7 @@ app.use(cors({
 }))
 app.disable('x-powered-by') // deshabilitar el header X-Powered-By: Express
 
+// LOS METODOS TIENEN QUE CORRESPONDER A LA RUTA Y DEBEN SER IGUALES DE ACUERDO A REST
 // métodos normales: GET/HEAD/POST
 // métodos complejos: PUT/PATCH/DELETE
 
@@ -47,7 +48,7 @@ app.get('/movies', (req, res) => {
   res.json(movies)
 })
 
-app.get('/movies/:id', (req, res) => {
+app.get('/movies/:id', (req, res) => { // se puede utilizar REGEX tanto como en la ruta como en los parametros de ella
   const { id } = req.params
   const movie = movies.find(movie => movie.id === id)
   if (movie) return res.json(movie)
@@ -72,10 +73,10 @@ app.post('/movies', (req, res) => {
   // el estado de la aplicación en memoria
   movies.push(newMovie)
 
-  res.status(201).json(newMovie)
+  res.status(201).json(newMovie) //http cats para ver status
 })
 
-app.delete('/movies/:id', (req, res) => {
+app.delete('/movies/:id', (req, res) => { 
   const { id } = req.params
   const movieIndex = movies.findIndex(movie => movie.id === id)
 
